@@ -12,7 +12,7 @@ import butterknife.ButterKnife;
 public class LoginActivity extends AppCompatActivity {
 
 
-    //This is a test comment h ghgh
+    //This is a test comment
     @Bind(R.id.loginInputEmail) EditText mEmailEt;
     @Bind(R.id.loginInputEmailLayout)TextInputLayout mEmailEtLayout;
     @Bind(R.id.loginInputPassword) EditText mPasswordEt;
