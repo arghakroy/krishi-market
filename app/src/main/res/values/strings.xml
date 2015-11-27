@@ -1,3 +1,69 @@
 <resources>
 	<string name="app_name">SUST Project</string>
+	<string-array name="districts">
+		<item>বরিশাল	</item>
+		<item>বরগুনা	</item>
+		<item>ভোলা</item>
+		<item>ঝালকাঠি</item>
+		<item>পটুয়াখালী</item>
+		<item>পিরোজপুর</item>
+		<item>বান্দরবান</item>
+		<item>ব্রাহ্মণবাড়ীয়া</item>
+		<item>চাঁদপুর</item>
+		<item>চট্টগ্রাম</item>
+		<item>কুমিল্লা</item>
+		<item>কক্সবাজার</item>
+		<item>ফেনী</item>
+		<item>খাগড়াছড়ি</item>
+		<item>লক্ষীপুর</item>
+		<item>নোয়াখালী</item>
+		<item>রাঙ্গামাটি</item>
+		<item>ঢাকা</item>
+		<item>ফরিদপুর</item>
+		<item>গাজীপুর</item>
+		<item>গোপালগঞ্জ</item>
+		<item>কিশোরগঞ্জ</item>
+		<item>মাদারীপুর</item>
+		<item>মানিকগঞ্জ</item>
+		<item>মুন্সীগঞ্জ</item>
+		<item>নারায়ণগঞ্জ</item>
+		<item>নরসিংদী</item>
+		<item>রাজবাড়ী</item>
+		<item>শরীয়তপুর</item>
+		<item>টাঙ্গাইল</item>
+		<item>বাগেরহাট</item>
+		<item>চুয়াডাঙ্গা</item>
+		<item>যশোর</item>
+		<item>ঝিনাইদহ</item>
+		<item>খুলনা</item>
+		<item>কুষ্টিয়া</item>
+		<item>মাগুরা</item>
+		<item>মেহেরপুর</item>
+		<item>নড়াইল</item>
+		<item>সাতক্ষিরা</item>
+		<item>জামালপুর</item>
+		<item>ময়মনসিংহ</item>
+		<item>নেত্রকোনা</item>
+		<item>শেরপুর</item>
+		<item>বগুড়া</item>
+		<item>জয়পুরহাট</item>
+		<item>নওগাঁ</item>
+		<item>নাটোর</item>
+		<item>নওয়াবগঞ্জ</item>
+		<item>পাবনা</item>
+		<item>রাজশাহী</item>
+		<item>সিরাজগঞ্জ</item>
+		<item>দিনাজপুর</item>
+		<item>গাইবান্ধা</item>
+		<item>কুড়িগ্রাম</item>
+		<item>লালমনিরহাট</item>
+		<item>নীলফামারী</item>
+		<item>পঞ্চগড়</item>
+		<item>রংপুর</item>
+		<item>ঠাকুরগাঁ</item>
+		<item>হবিগঞ্জ</item>
+		<item>মৌলভীবাজার</item>
+		<item>সুনামগঞ্জ</item>
+		<item>সিলেট</item>
+	</string-array>
 </resources>
