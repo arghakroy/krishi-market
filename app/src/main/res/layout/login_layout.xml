@@ -22,52 +22,52 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content">
 
-			<EditText
-					android:id="@+id/loginInputEmail"
+			<me.argha.sustproject.views.BanglaEditText
+					android:id="@+id/loginUserNameEt"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:inputType="text"
 					android:singleLine="true"
-					android:hint="email" />
+					android:hint="ইউজার নাম" />
 		</android.support.design.widget.TextInputLayout>
 		<android.support.design.widget.TextInputLayout
 				android:id="@+id/input_layout_email"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content">
 
-			<EditText
-					android:id="@+id/loginInputPassword"
+			<me.argha.sustproject.views.BanglaEditText
+					android:id="@+id/loginPasswordEt"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:inputType="textEmailAddress"
-					android:hint="password" />
+					android:inputType="textPassword"
+					android:hint="পাসওয়ার্ড" />
 		</android.support.design.widget.TextInputLayout>
-		<android.support.v7.widget.AppCompatButton
-				android:id="@+id/btn_login"
-				android:layout_width="fill_parent"
+		<me.argha.sustproject.views.BanglaButton
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="24dp"
-				android:layout_marginBottom="24dp"
-				android:padding="12dp"
+				android:textSize="20sp"
 				android:textColor="#fff"
-				android:text="Login"/>
+				android:background="@color/primary"
+				android:text="লগিন"/>
 
 		<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:gravity="center"
 				android:orientation="horizontal">
-			<TextView
+			<me.argha.sustproject.views.BanglaTextView
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:text="Not registered yet?"/>
-			<Button
+					android:text="সদস্য হতে চান?"/>
+			<me.argha.sustproject.views.BanglaButton
 					android:id="@+id/loginRegisterBtn"
 					android:layout_width="wrap_content"
 					android:background="@android:color/transparent"
 					android:layout_height="wrap_content"
 					android:textStyle="bold"
 					android:padding="3dp"
-					android:text="Register Now"/>
+					android:textColor="@color/primary_dark"
+					android:text="রেজিস্টার করুন"/>
 		</LinearLayout>
 	</LinearLayout>
 </RelativeLayout>
