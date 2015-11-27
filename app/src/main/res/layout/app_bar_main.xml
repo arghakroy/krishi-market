@@ -5,6 +5,7 @@
 		xmlns:tools="http://schemas.android.com/tools"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
+		xmlns:fab="http://schemas.android.com/apk/res-auto"
 		android:fitsSystemWindows="true"
 		tools:context="me.argha.sustproject.MainActivity">
 
@@ -24,12 +25,37 @@
 
 	<include layout="@layout/content_main"/>
 
-	<android.support.design.widget.FloatingActionButton
-			android:id="@+id/fab"
+	<com.github.clans.fab.FloatingActionMenu
+			android:id="@+id/fabMenu"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="bottom|end"
+			fab:menu_labels_style="@style/MenuLabelsStyle"
 			android:layout_margin="@dimen/fab_margin"
-			android:src="@android:drawable/ic_dialog_email"/>
+			fab:menu_labels_showAnimation="@anim/jump_from_down"
+			fab:menu_labels_hideAnimation="@anim/jump_to_down"
+			fab:menu_animationDelayPerItem="0"
+			fab:menu_shadowColor="#444"
+			fab:menu_colorNormal="@color/accent"
+			fab:menu_colorPressed="@color/accent"
+			fab:menu_colorRipple="#D99200">
+
+		<com.github.clans.fab.FloatingActionButton
+				android:id="@+id/searchFabBtn"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:src="@drawable/ic_action_action_search"
+				fab:fab_label="Search"
+				style="@style/MenuButtonsStyle" />
+
+		<com.github.clans.fab.FloatingActionButton
+				android:id="@+id/voiceFabBtn"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:src="@drawable/ic_action_av_mic"
+				fab:fab_label="Voice Command"
+				style="@style/MenuButtonsStyle" />
+
+	</com.github.clans.fab.FloatingActionMenu>
 
 </android.support.design.widget.CoordinatorLayout>
