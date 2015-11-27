@@ -21,6 +21,7 @@
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content">
 					<me.argha.sustproject.views.BanglaEditText
+							android:id="@+id/addItemName"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:hint="পণ্যের নাম"/>
@@ -29,6 +30,7 @@
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content">
 					<me.argha.sustproject.views.BanglaEditText
+							android:id="@+id/addItemDescription"
 							android:layout_width="match_parent"
 							android:layout_height="100dp"
 							android:gravity="start"
@@ -58,12 +60,14 @@
 							android:layout_weight="1"
 							android:layout_height="wrap_content">
 						<me.argha.sustproject.views.BanglaEditText
+								android:id="@+id/addItemQuantity"
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
 								android:inputType="numberDecimal"
 								android:hint="পরিমান"/>
 					</android.support.design.widget.TextInputLayout>
 					<Spinner
+							android:id="@+id/addItemUnitSpinner"
 							android:layout_width="wrap_content"
 							android:layout_height="match_parent"
 							android:gravity="center"
@@ -85,6 +89,7 @@
 							android:layout_weight="1"
 							android:layout_height="wrap_content">
 						<me.argha.sustproject.views.BanglaEditText
+								android:id="@+id/addItemMinimum"
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
 								android:inputType="numberDecimal"
@@ -103,6 +108,7 @@
 							android:layout_weight="1"
 							android:layout_height="wrap_content">
 						<me.argha.sustproject.views.BanglaEditText
+								android:id="@+id/addItemMaximum"
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
 								android:inputType="numberDecimal"

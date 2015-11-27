@@ -26,6 +26,7 @@
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content">
 					<TextView
+							android:id="@+id/itemDetailsNameTv"
 							android:layout_width="0dp"
 							android:layout_weight="1"
 							android:text="Item Name"
@@ -33,6 +34,7 @@
 							android:textColor="#000"
 							android:layout_height="wrap_content"/>
 					<TextView
+							android:id="@+id/itemDetailsRatingTv"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:textSize="20sp"
@@ -42,6 +44,7 @@
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content">
 					<TextView
+							android:id="@+id/itemDetailsSubCatTv"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:textSize="17sp"
@@ -55,12 +58,14 @@
 							android:layout_marginRight="10dp"
 							android:text="-"/>
 					<TextView
+							android:id="@+id/itemDetailsParentCatTv"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:textSize="17sp"
 							android:text="Item Parent Category"/>
 				</LinearLayout>
 				<TextView
+						android:id="@+id/itemDetailsPriceRange"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:textSize="20sp"
@@ -74,6 +79,7 @@
 						android:layout_marginTop="10dp"
 						android:text="Deatils - "/>
 				<TextView
+						android:id="@+id/itemDetailsDescriptionTv"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:textSize="18sp"
@@ -84,6 +90,7 @@
 						android:gravity="center_vertical"
 						android:layout_marginTop="20dp">
 					<Button
+							android:id="@+id/itemDetailsSellerInfoBtn"
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
 							android:layout_weight="1"
@@ -91,22 +98,12 @@
 							android:textSize="18sp"
 							android:textColor="#fff"/>
 					<RatingBar
+							android:id="@+id/itemDetailsRatingBar"
 							style="?android:attr/ratingBarStyleIndicator"
 							android:isIndicator="false"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"/>
 				</LinearLayout>
-				<TextView
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:textSize="20sp"
-						android:text="Comments -"
-						android:textColor="#000"/>
-				<android.support.v7.widget.RecyclerView
-						android:padding="3dp"
-						android:layout_marginTop="10dp"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"/>
 			</LinearLayout>
 		</ScrollView>
 	</android.support.v7.widget.CardView>
