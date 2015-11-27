@@ -15,12 +15,15 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
 import me.argha.sustproject.helpers.HTTPHelper;
+import me.argha.sustproject.helpers.PrefHelper;
+import me.argha.sustproject.utils.AppConst;
 import me.argha.sustproject.utils.AppURL;
 import me.argha.sustproject.utils.Util;
 
@@ -35,12 +38,15 @@ public class LoginActivity extends AppCompatActivity {
     @Bind(R.id.loginRegisterBtn) Button registerBtn;
     @Bind(R.id.loginSubmitBtn) Button loginBtn;
 
+    PrefHelper prefHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
         ButterKnife.bind(this);
         context=this;
+        prefHelper=new PrefHelper(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         httpClient= HTTPHelper.getHTTPClient();
@@ -48,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(context, RegisterActivity.class));
+                startActivityForResult(new Intent(context, RegisterActivity.class), AppConst.REGISTER_REQUEST);
             }
         });
 
@@ -76,12 +82,27 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 Util.printDebug("Login response",response.toString());
+                try {
+                    if(response.getBoolean("success")){
+                        Util.printDebug("Success","");
+
+                        JSONObject resObject=response.getJSONObject("data");
+                        prefHelper.saveUserId(resObject.getString("id"));
+                        prefHelper.saveUserFullName(resObject.getString("name"));
+                        prefHelper.saveUserName(resObject.getString("username"));
+                        startActivity(new Intent(context, MainActivity.class));
+                        finish();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Util.printDebug("Json erro",e.getMessage());
+                }
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
-                Util.printDebug("Login fail",responseString);
+                Util.printDebug("Login fail", responseString);
             }
 
             @Override
@@ -90,5 +111,14 @@ public class LoginActivity extends AppCompatActivity {
                 dialog.cancel();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==AppConst.REGISTER_REQUEST && resultCode==RESULT_OK){
+            startActivity(new Intent(this,MainActivity.class));
+            finish();
+        }
     }
 }

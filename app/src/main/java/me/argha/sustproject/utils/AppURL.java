@@ -6,7 +6,7 @@ package me.argha.sustproject.utils;
  */
 public interface AppURL {
 
-    String DOMAIN="http://10.0.3.2:81/efarmer/api/";
+    String DOMAIN="http://argha.xyz/_efarmer/api/";
     String LOGIN=DOMAIN+"login";
     String REGISTER=DOMAIN+"register";
     String CATEGORIES=DOMAIN+"categories";

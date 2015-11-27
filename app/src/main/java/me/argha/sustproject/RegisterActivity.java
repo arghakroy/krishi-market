@@ -2,6 +2,7 @@ package me.argha.sustproject;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,12 +15,14 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
 import me.argha.sustproject.helpers.HTTPHelper;
+import me.argha.sustproject.helpers.PrefHelper;
 import me.argha.sustproject.utils.AppURL;
 import me.argha.sustproject.utils.Util;
 
@@ -38,12 +41,14 @@ public class RegisterActivity extends AppCompatActivity {
     @Bind(R.id.registerDistrictSpinner)Spinner districtSpinner;
     @Bind(R.id.registerSubmitBtn) Button submitButton;
     Context context;
+    PrefHelper prefHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registartion_layout);
         context=this;
+        prefHelper=new PrefHelper(this);
         ButterKnife.bind(this);
         Toolbar toolbar= (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -83,6 +88,18 @@ public class RegisterActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 Util.printDebug("Register response",response.toString());
+                try {
+                    if(response.getBoolean("success")){
+                        JSONObject resObject=response.getJSONObject("data");
+                        prefHelper.saveUserId(resObject.getString("id"));
+                        prefHelper.saveUserFullName(resObject.getString("name"));
+                        prefHelper.saveUserName(resObject.getString("username"));
+                        setResult(RESULT_OK);
+                        finish();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
