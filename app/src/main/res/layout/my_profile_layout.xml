@@ -12,6 +12,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_margin="10dp"
+			android:padding="10dp"
 			card_view:cardCornerRadius="2dp">
 		<ScrollView
 				android:layout_width="match_parent"
@@ -24,6 +25,15 @@
 					android:orientation="vertical"
 					android:padding="10dp"
 					android:gravity="center">
+				<ImageButton
+						android:id="@+id/changePictureImgBtn"
+						android:layout_width="wrap_content"
+						android:layout_height="150dp"
+						android:adjustViewBounds="true"
+						android:layout_margin="10dp"
+						android:src="@drawable/ic_image_nature_people"
+						android:background="@android:color/transparent"/>
+
 				<android.support.design.widget.TextInputLayout
 						android:id="@+id/loginInputNameLayout"
 						android:layout_width="match_parent"
@@ -105,10 +115,11 @@
 						android:padding="10dp"
 						android:entries="@array/districtsBangla"/>
 				<me.argha.sustproject.views.BanglaButton
-						android:id="@+id/rmyProfileUpdateBtn"
+						android:id="@+id/myProfileUpdateBtn"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:textColor="#fff"
+						android:layout_marginBottom="10dp"
 						android:background="@color/primary"
 						android:text="পরিবর্তন সংরক্ষন করুন"/>
 			</LinearLayout>

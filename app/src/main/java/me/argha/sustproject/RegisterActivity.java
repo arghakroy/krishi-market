@@ -56,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
                     passwordEt.getText().toString(),
                     phoneEt.getText().toString(),
                     addressEt.getText().toString(),
-                    districtSpinner.getSelectedItem().toString());
+                    getResources().getStringArray(R.array.districtsEnglish)[districtSpinner.getSelectedItemPosition()]);
             }
         });
     }
