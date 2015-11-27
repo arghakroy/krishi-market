@@ -21,8 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     @Bind(R.id.loginInputEmail) EditText mEmailEt;
     @Bind(R.id.loginInputEmailLayout)TextInputLayout mEmailEtLayout;
     @Bind(R.id.loginInputPassword) EditText mPasswordEt;
-    @Bind(R.id.loginRegisterBtn)
-    Button registerBtn;
+    @Bind(R.id.loginRegisterBtn) Button registerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
