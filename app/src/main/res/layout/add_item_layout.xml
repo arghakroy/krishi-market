@@ -20,10 +20,10 @@
 				<android.support.design.widget.TextInputLayout
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content">
-					<EditText
+					<me.argha.sustproject.views.BanglaEditText
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:hint="Item Name"/>
+							android:hint="পণ্যের নাম"/>
 				</android.support.design.widget.TextInputLayout>
 				<android.support.design.widget.TextInputLayout
 						android:layout_width="match_parent"
@@ -32,7 +32,7 @@
 							android:layout_width="match_parent"
 							android:layout_height="100dp"
 							android:gravity="start"
-							android:hint="Item Description"/>
+							android:hint="পণ্যের বিবরণ"/>
 				</android.support.design.widget.TextInputLayout>
 				<LinearLayout
 						android:layout_width="match_parent"
@@ -59,7 +59,7 @@
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
 								android:inputType="numberDecimal"
-								android:hint="Quantity"/>
+								android:hint="পরিমান"/>
 					</android.support.design.widget.TextInputLayout>
 					<Spinner
 							android:layout_width="wrap_content"
@@ -67,15 +67,16 @@
 							android:gravity="center"
 							android:entries="@array/item_unit"/>
 				</LinearLayout>
-				<TextView
+				<me.argha.sustproject.views.BanglaTextView
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:textSize="20sp"
 						android:textColor="#000"
-						android:text="Price Range / Unit"/>
+						android:text="প্রতি ইউনিট দাম - "/>
 				<LinearLayout
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
+						android:gravity="center"
 						android:orientation="horizontal">
 					<android.support.design.widget.TextInputLayout
 							android:layout_width="0dp"
@@ -85,8 +86,16 @@
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
 								android:inputType="numberDecimal"
-								android:hint="Minimum"/>
+								android:hint="সর্বোনিম্ন"/>
 					</android.support.design.widget.TextInputLayout>
+					<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textSize="30sp"
+							android:textStyle="bold"
+							android:paddingLeft="15dp"
+							android:paddingRight="15dp"
+							android:text="-"/>
 					<android.support.design.widget.TextInputLayout
 							android:layout_width="0dp"
 							android:layout_weight="1"
@@ -95,36 +104,45 @@
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
 								android:inputType="numberDecimal"
-								android:hint="Maximum"/>
+								android:hint="সর্বোচ্চ"/>
 					</android.support.design.widget.TextInputLayout>
 				</LinearLayout>
 				<CheckBox
+						android:id="@+id/addItemExpireCheckBox"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:textSize="20sp"
-						android:text="Can be expired?"/>
+						android:text="মেয়াদ উত্তীর্ণ হবে?"/>
 				<LinearLayout
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:orientation="horizontal">
-					<Button
+					<me.argha.sustproject.views.BanglaButton
+							android:id="@+id/addItemSelectPhotoBtn"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:textColor="#fff"
-							android:text="Select Photo"/>
+							android:background="@color/primary_light"
+							android:layout_margin="5dp"
+							android:padding="5dp"
+							android:text="পণ্যের ছবি পছন্দ করুন"/>
 					<TextView
+							android:id="@+id/addItemSelectImageNameTv"
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
 							android:textSize="17sp"
+							android:singleLine="true"
+							android:ellipsize="start"
 							android:layout_weight="1"/>
 				</LinearLayout>
-				<Button
+				<me.argha.sustproject.views.BanglaButton
+						android:id="@+id/addItemSaveBtn"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:textSize="20sp"
 						android:background="@color/primary_darker"
 						android:textColor="#fff"
-						android:text="SAVE"/>
+						android:text="প্রকাশ করুন"/>
 			</LinearLayout>
 		</ScrollView>
 	</android.support.v7.widget.CardView>
