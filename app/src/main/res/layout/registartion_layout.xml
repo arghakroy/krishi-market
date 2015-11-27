@@ -23,7 +23,7 @@
 				android:layout_height="wrap_content">
 
 			<EditText
-					android:id="@+id/loginInputName"
+					android:id="@+id/registerNameEt"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:singleLine="true"
@@ -35,7 +35,7 @@
 				android:layout_height="wrap_content">
 
 			<EditText
-					android:id="@+id/loginInputEmail"
+					android:id="@+id/registerEmailEt"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:singleLine="true"
@@ -47,10 +47,11 @@
 				android:layout_height="wrap_content">
 
 			<EditText
-					android:id="@+id/loginInputPassword"
+					android:id="@+id/registerPasswordEt"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:inputType="textPassword"
+					android:fontFamily="sans"
 					android:hint="password" />
 		</android.support.design.widget.TextInputLayout>
 		<android.support.design.widget.TextInputLayout
@@ -59,14 +60,15 @@
 				android:layout_height="wrap_content">
 
 			<EditText
-					android:id="@+id/loginInputPasswordConfirm"
+					android:id="@+id/registerPasswordConfirmEt"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:inputType="textPassword"
+					android:fontFamily="sans"
 					android:hint="confirm password" />
 		</android.support.design.widget.TextInputLayout>
 		<android.support.v7.widget.AppCompatButton
-				android:id="@+id/btn_login"
+				android:id="@+id/registerSubmitBtn"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="24dp"

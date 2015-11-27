@@ -61,6 +61,7 @@
 					android:layout_height="wrap_content"
 					android:text="Not registered yet?"/>
 			<Button
+					android:id="@+id/loginRegisterBtn"
 					android:layout_width="wrap_content"
 					android:background="@android:color/transparent"
 					android:layout_height="wrap_content"
