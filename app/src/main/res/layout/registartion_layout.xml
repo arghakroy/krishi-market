@@ -79,7 +79,7 @@
 						android:id="@+id/registerAddressEt"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:inputType="textPassword"
+						android:inputType="text"
 						android:hint="ফোন" />
 			</android.support.design.widget.TextInputLayout>
 			<android.support.design.widget.TextInputLayout
@@ -91,14 +91,14 @@
 						android:id="@+id/registerPasswordConfirmEt"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:inputType="textPassword"
-						android:fontFamily="sans"
+						android:inputType="text"
 						android:hint="ঠিকানা" />
 			</android.support.design.widget.TextInputLayout>
 			<Spinner
 					android:id="@+id/registerDistrictSpinner"
 					android:layout_width="match_parent"
-					android:layout_height="wrap_content"/>
+					android:layout_height="wrap_content"
+					android:entries="@array/districts"/>
 			<me.argha.sustproject.views.BanglaButton
 					android:id="@+id/registerSubmitBtn"
 					android:layout_width="match_parent"

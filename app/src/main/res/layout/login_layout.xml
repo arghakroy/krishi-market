@@ -43,6 +43,7 @@
 					android:hint="পাসওয়ার্ড" />
 		</android.support.design.widget.TextInputLayout>
 		<me.argha.sustproject.views.BanglaButton
+				android:id="@+id/loginSubmitBtn"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:textSize="20sp"
