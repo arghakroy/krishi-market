@@ -2,10 +2,10 @@ package me.argha.sustproject;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
     Context context;
     PrefHelper prefHelper;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,12 +57,35 @@ public class RegisterActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registerUser(fullNameEt.getText().toString(),
-                    userNameEt.getText().toString(),
-                    passwordEt.getText().toString(),
-                    phoneEt.getText().toString(),
-                    addressEt.getText().toString(),
-                    getResources().getStringArray(R.array.districtsEnglish)[districtSpinner.getSelectedItemPosition()]);
+                if (TextUtils.isEmpty(userNameEt.getText().toString())) {
+                    Util.showToast(context, "Please enter a username");
+                } else if (TextUtils.isEmpty(fullNameEt.getText().toString())) {
+                    Util.showToast(context, "Please enter your fullname");
+                } else if (TextUtils.isEmpty(phoneEt.getText().toString())) {
+                    Util.showToast(context, "Please enter your phone");
+                } else if (TextUtils.isEmpty(addressEt.getText().toString())) {
+                    Util.showToast(context, "Please enter an address");
+                } else if (TextUtils.isEmpty(passwordEt.getText().toString())) {
+                    Util.showToast(context, "Password cannot be vacant");
+                } else if (TextUtils.isEmpty(passwordConfirmEt.getText().toString())) {
+                    Util.showToast(context, "Please confirm your password");
+                } else if (passwordEt.length() < 6) {
+                    Util.showToast(context, "Passwords must be of at least 6 characters");
+                } else if (!passwordEt.getText().toString().equals(passwordConfirmEt
+                        .getText()
+                        .toString())) {
+                    Util.showToast(context, "Passwords don't match");
+                }else if(districtSpinner.getSelectedItemPosition()==0) {
+                    Util.showToast(context, "Please Choose a district");
+                }else {
+
+                    registerUser(fullNameEt.getText().toString(),
+                            userNameEt.getText().toString(),
+                            passwordEt.getText().toString(),
+                            phoneEt.getText().toString(),
+                            addressEt.getText().toString(),
+                            getResources().getStringArray(R.array.districtsEnglish)[districtSpinner.getSelectedItemPosition()]);
+                }
             }
         });
     }
