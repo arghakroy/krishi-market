@@ -11,4 +11,5 @@ public interface AppURL {
     public static final String REGISTER=DOMAIN+"register";
     public static final String CATEGORIES=DOMAIN+"categories";
     public static final String ADD_ITEM=DOMAIN+"create_item";
+    public static final String ALL_ITEMS=DOMAIN+"all_items";
 }
