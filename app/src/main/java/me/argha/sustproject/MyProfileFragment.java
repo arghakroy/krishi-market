@@ -35,6 +35,7 @@ import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
 import me.argha.sustproject.helpers.HTTPHelper;
 import me.argha.sustproject.helpers.MediaHelper;
+import me.argha.sustproject.helpers.PrefHelper;
 import me.argha.sustproject.utils.AppConst;
 import me.argha.sustproject.utils.AppURL;
 import me.argha.sustproject.utils.Util;
@@ -55,6 +56,8 @@ public class MyProfileFragment extends Fragment {
     @Bind(R.id.myProfileUpdateBtn) Button updateBtn;
     @Bind(R.id.changePictureImgBtn) ImageButton profilePicBtn;
 
+    PrefHelper prefHelper;
+
 
     Uri fileUri;
     String filePath;
@@ -66,7 +69,7 @@ public class MyProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root=inflater.inflate(R.layout.my_profile_layout,container,false);
         ButterKnife.bind(this, root);
-
+        prefHelper=new PrefHelper(getActivity());
         httpClient= HTTPHelper.getHTTPClient();
 
         profilePicBtn.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +94,7 @@ public class MyProfileFragment extends Fragment {
 
     private void updateUserProfile() throws FileNotFoundException {
         RequestParams params=new RequestParams();
-        params.add("user_id","11");
+        params.add("user_id",prefHelper.getUserId());
         params.add("name",nameEt.getText().toString());
         params.add("username",userNameEt.getText().toString());
         params.add("password",passwordEt.getText().toString());
@@ -140,7 +143,7 @@ public class MyProfileFragment extends Fragment {
 
     private void getUserDetailsData() {
         RequestParams params=new RequestParams();
-        params.add("user_id", "11");
+        params.add("user_id", prefHelper.getUserId());
         final ProgressDialog dialog= Util.getProgressDialog(getActivity(),"Getting Details. Please wait...");
         httpClient.post(AppURL.USER_PROFILE, params, new JsonHttpResponseHandler() {
             @Override

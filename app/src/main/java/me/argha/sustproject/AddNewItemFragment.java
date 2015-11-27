@@ -40,6 +40,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
 import me.argha.sustproject.helpers.MediaHelper;
+import me.argha.sustproject.helpers.PrefHelper;
 import me.argha.sustproject.models.Category;
 import me.argha.sustproject.utils.AppConst;
 import me.argha.sustproject.utils.AppURL;
@@ -69,12 +70,14 @@ public class AddNewItemFragment extends Fragment implements View.OnClickListener
     String expireDate=null;
     AsyncHttpClient httpClient;
     ArrayList<Category> allCategories;
+    PrefHelper prefHelper;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root=inflater.inflate(R.layout.add_item_layout, container, false);
         ButterKnife.bind(this, root);
+        prefHelper=new PrefHelper(getActivity());
         selectImageButton.setOnClickListener(this);
         hasExpire.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -103,7 +106,7 @@ public class AddNewItemFragment extends Fragment implements View.OnClickListener
 
     private void saveNewItem() throws FileNotFoundException {
         RequestParams params=new RequestParams();
-        params.add("user_id","0");
+        params.add("user_id",prefHelper.getUserId());
         params.add("name",itemNameEt.getText().toString());
         params.add("description",itemDescEt.getText().toString());
         params.add("main_category",((Category)mainCatSpinner.getSelectedItem()).getEnName());
