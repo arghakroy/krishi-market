@@ -47,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.registartion_layout);
+        setContentView(R.layout.registration_layout);
         context=this;
         prefHelper=new PrefHelper(this);
         ButterKnife.bind(this);
