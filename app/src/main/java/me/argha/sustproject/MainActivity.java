@@ -3,6 +3,7 @@ package me.argha.sustproject;
 import android.app.SearchManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
@@ -17,8 +18,13 @@ import android.view.MenuItem;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
+import me.argha.sustproject.utils.Util;
+
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
+
+    FloatingActionMenu fabMenu;
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +33,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionMenu fabMenu = (FloatingActionMenu) findViewById(R.id.fabMenu);
+        fabMenu = (FloatingActionMenu) findViewById(R.id.fabMenu);
         FloatingActionButton searchFabBtn= (FloatingActionButton) fabMenu.findViewById(R.id.searchFabBtn);
         FloatingActionButton voiceBtn= (FloatingActionButton) findViewById(R.id.voiceFabBtn);
 
@@ -37,7 +43,7 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -51,29 +57,38 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            navigationView.setCheckedItem(0);
+            lastMenuItem=null;
+            fabMenu.showMenu(true);
             super.onBackPressed();
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.menu_search));
-        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
+    MenuItem lastMenuItem;
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        if(item.isChecked())return false;
         // Handle navigation view item clicks here.
+        FragmentManager fm =getSupportFragmentManager();
+        for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+            fm.popBackStack();
+        }
+
         int id = item.getItemId();
+        switch (id){
+            case R.id.nav_add_item:
+                fabMenu.hideMenu(true);
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                ft.replace(R.id.main_fragment, new AddNewItemFragment());
+                ft.addToBackStack(null);
+                ft.commit();
+                break;
+            case R.id.nav_all_item:
+                fabMenu.showMenu(true);
+                break;
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
