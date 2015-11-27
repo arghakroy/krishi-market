@@ -17,10 +17,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
     Context context;
-    //This is a test comment
-    @Bind(R.id.loginInputEmail) EditText mEmailEt;
+    @Bind(R.id.loginUserNameEt) EditText mEmailEt;
     @Bind(R.id.loginInputEmailLayout)TextInputLayout mEmailEtLayout;
-    @Bind(R.id.loginInputPassword) EditText mPasswordEt;
+    @Bind(R.id.loginPasswordEt) EditText mPasswordEt;
     @Bind(R.id.loginRegisterBtn) Button registerBtn;
 
     @Override
