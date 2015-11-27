@@ -19,16 +19,20 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -47,12 +51,18 @@ import me.argha.sustproject.utils.Util;
  */
 public class AddNewItemFragment extends Fragment implements View.OnClickListener{
 
+    @Bind(R.id.addItemName) EditText itemNameEt;
+    @Bind(R.id.addItemDescription) EditText itemDescEt;
+    @Bind(R.id.addItemQuantity) EditText itemQuantityEt;
+    @Bind(R.id.addItemMinimum) EditText itemRangeMinEt;
+    @Bind(R.id.addItemMaximum) EditText itemRangeMaxEt;
     @Bind(R.id.addItemExpireCheckBox)CheckBox hasExpire;
     @Bind(R.id.addItemSelectPhotoBtn)Button selectImageButton;
     @Bind(R.id.addItemSaveBtn)Button saveBtn;
     @Bind(R.id.addItemSelectImageNameTv)TextView selectImageName;
     @Bind(R.id.addItemMainCategorySpinner)Spinner mainCatSpinner;
     @Bind(R.id.addItemSubCategorySpinner) Spinner subCatSpinner;
+    @Bind(R.id.addItemUnitSpinner) Spinner unitSpinner;
 
     Uri fileUri;
     String filePath;
@@ -76,7 +86,73 @@ public class AddNewItemFragment extends Fragment implements View.OnClickListener
         });
         httpClient=new AsyncHttpClient();
         getAllCategories();
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    saveNewItem();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                    Util.printDebug("Json excep", e.getMessage());
+                }
+            }
+        });
         return root;
+    }
+
+    private void saveNewItem() throws FileNotFoundException {
+        RequestParams params=new RequestParams();
+        params.add("user_id","0");
+        params.add("name",itemNameEt.getText().toString());
+        params.add("description",itemDescEt.getText().toString());
+        params.add("main_category",((Category)mainCatSpinner.getSelectedItem()).getEnName());
+        params.add("sub_category", ((Category) subCatSpinner.getSelectedItem()).getEnName());
+        params.add("quantity", itemQuantityEt.getText().toString());
+        params.add("unit", unitSpinner.getSelectedItem().toString());
+        params.add("range_min",itemRangeMinEt.getText().toString());
+        params.add("range_max", itemRangeMaxEt.getText().toString());
+        if(hasExpire.isChecked() && expireDate!=null)
+            params.add("expire_date",expireDate);
+        else params.add("expire_date","");
+        params.put("photo", new File(filePath));
+
+        final ProgressDialog dialog=Util.getProgressDialog(getActivity(),"Submitting. Please wait...");
+        httpClient.post(AppURL.ADD_ITEM,params,new JsonHttpResponseHandler(){
+            @Override
+            public void onStart() {
+                super.onStart();
+                dialog.show();
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                Util.printDebug("Add item response",response.toString());
+                try {
+                    if(response.getBoolean("success")) {
+                        Util.showToast(getActivity(),"Item is successfully published");
+                        getActivity().onBackPressed();
+                    }
+                    else Util.showToast(getActivity(),"Something is wrong");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Util.printDebug("json excep",e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Util.printDebug("Add item error", responseString);
+            }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
+                dialog.dismiss();
+            }
+        });
     }
 
     private void getAllCategories() {

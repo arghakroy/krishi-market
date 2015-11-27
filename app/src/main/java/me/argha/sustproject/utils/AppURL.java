@@ -10,4 +10,5 @@ public interface AppURL {
     public static final String LOGIN=DOMAIN+"login";
     public static final String REGISTER=DOMAIN+"register";
     public static final String CATEGORIES=DOMAIN+"categories";
+    public static final String ADD_ITEM=DOMAIN+"create_item";
 }
