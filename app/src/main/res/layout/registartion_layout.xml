@@ -63,7 +63,7 @@
 					android:layout_height="wrap_content">
 
 				<me.argha.sustproject.views.BanglaEditText
-						android:id="@+id/registerPhoneEt"
+						android:id="@+id/registerPasswordConfirmEt"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:inputType="textPassword"
@@ -76,7 +76,7 @@
 					android:layout_height="wrap_content">
 
 				<me.argha.sustproject.views.BanglaEditText
-						android:id="@+id/registerAddressEt"
+						android:id="@+id/registerPhoneEt"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:inputType="text"
@@ -88,7 +88,7 @@
 					android:layout_height="wrap_content">
 
 				<me.argha.sustproject.views.BanglaEditText
-						android:id="@+id/registerPasswordConfirmEt"
+						android:id="@+id/registerAddressEt"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:inputType="text"

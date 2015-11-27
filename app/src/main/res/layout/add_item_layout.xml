@@ -28,7 +28,7 @@
 				<android.support.design.widget.TextInputLayout
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content">
-					<EditText
+					<me.argha.sustproject.views.BanglaEditText
 							android:layout_width="match_parent"
 							android:layout_height="100dp"
 							android:gravity="start"
@@ -39,10 +39,12 @@
 						android:layout_height="wrap_content"
 						android:orientation="horizontal">
 					<Spinner
+							android:id="@+id/addItemMainCategorySpinner"
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
 							android:layout_weight="1"/>
 					<Spinner
+							android:id="@+id/addItemSubCategorySpinner"
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
 							android:layout_weight="1"/>
@@ -55,7 +57,7 @@
 							android:layout_width="0dp"
 							android:layout_weight="1"
 							android:layout_height="wrap_content">
-						<EditText
+						<me.argha.sustproject.views.BanglaEditText
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
 								android:inputType="numberDecimal"
@@ -82,7 +84,7 @@
 							android:layout_width="0dp"
 							android:layout_weight="1"
 							android:layout_height="wrap_content">
-						<EditText
+						<me.argha.sustproject.views.BanglaEditText
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
 								android:inputType="numberDecimal"
@@ -100,7 +102,7 @@
 							android:layout_width="0dp"
 							android:layout_weight="1"
 							android:layout_height="wrap_content">
-						<EditText
+						<me.argha.sustproject.views.BanglaEditText
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
 								android:inputType="numberDecimal"

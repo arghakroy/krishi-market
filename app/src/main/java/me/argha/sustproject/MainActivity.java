@@ -1,24 +1,18 @@
 package me.argha.sustproject;
 
-import android.app.SearchManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
-
-import me.argha.sustproject.utils.Util;
 
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
@@ -87,6 +81,14 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_all_item:
                 fabMenu.showMenu(true);
+                break;
+            case R.id.nav_profile:
+                fabMenu.hideMenu(true);
+                FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
+                ft2.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                ft2.replace(R.id.main_fragment, new MyProfileFragment());
+                ft2.addToBackStack(null);
+                ft2.commit();
                 break;
         }
 

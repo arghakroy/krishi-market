@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -45,13 +46,14 @@ public class AllItemsFragment extends Fragment {
         inflater.inflate(R.menu.main,menu);
     }
 
-    class ItemAdapter extends RecyclerView.Adapter<AllItemViewHolder>{
+    class ItemAdapter extends RecyclerView.Adapter<AllItemViewHolder> implements View.OnClickListener{
 
         @Override
         public AllItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.
                 from(parent.getContext()).
                 inflate(R.layout.single_list_item, parent, false);
+            itemView.setOnClickListener(this);
             return new AllItemViewHolder(itemView);
         }
 
@@ -63,6 +65,14 @@ public class AllItemsFragment extends Fragment {
         @Override
         public int getItemCount() {
             return 10;
+        }
+
+        @Override
+        public void onClick(View view) {
+            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.main_fragment, new ItemDetailsFragment());
+            ft.addToBackStack(null);
+            ft.commit();
         }
     }
 }
