@@ -98,7 +98,7 @@
 					android:id="@+id/registerDistrictSpinner"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:entries="@array/districts"/>
+					android:entries="@array/districtsBangla"/>
 			<me.argha.sustproject.views.BanglaButton
 					android:id="@+id/registerSubmitBtn"
 					android:layout_width="match_parent"
