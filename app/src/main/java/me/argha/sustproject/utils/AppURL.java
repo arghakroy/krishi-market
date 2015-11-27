@@ -9,4 +9,5 @@ public interface AppURL {
     public static final String DOMAIN="http://10.0.3.2:81/efarmer/api/";
     public static final String LOGIN=DOMAIN+"login";
     public static final String REGISTER=DOMAIN+"register";
+    public static final String CATEGORIES=DOMAIN+"categories";
 }
