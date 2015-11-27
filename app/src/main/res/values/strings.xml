@@ -1,6 +1,7 @@
 <resources>
-	<string name="app_name">SUST Project</string>
+	<string name="app_name">Krishi Bazaar</string>
 	<string-array name="districtsEnglish">
+		<item>Select District</item>
 		<item>Barguna</item>
 		<item>Barisal</item>
 		<item>Bhola</item>
@@ -12,7 +13,7 @@
 		<item>Chandpur</item>
 		<item>Chittagong</item>
 		<item>Comilla</item>
-		<item>Cox's Bazar</item>
+		<item>Cox\'s Bazar</item>
 		<item>Feni</item>
 		<item>Khagrachhari</item>
 		<item>Lakshmipur</item>
@@ -67,6 +68,7 @@
 		<item>Sylhet</item>
 	</string-array>
 	<string-array name="districtsBangla">
+		<item>জেলা	</item>
 		<item>বরিশাল	</item>
 		<item>বরগুনা	</item>
 		<item>ভোলা</item>
@@ -132,4 +134,10 @@
 		<item>সুনামগঞ্জ</item>
 		<item>সিলেট</item>
 	</string-array>
+	<string name="title_activity_main">MainActivity</string>
+
+	<string name="navigation_drawer_open">Open navigation drawer</string>
+	<string name="navigation_drawer_close">Close navigation drawer</string>
+
+	<string name="action_settings">Settings</string>
 </resources>
