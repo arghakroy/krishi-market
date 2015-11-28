@@ -3,7 +3,6 @@ package me.argha.sustproject;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -35,10 +34,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        Toast.makeText(MapsActivity.this,"BLABLA",Toast.LENGTH_SHORT).show();
+//        Toast.makeText(MapsActivity.this,"BLABLA",Toast.LENGTH_SHORT).show();
         Log.i("TAG", "On create");
         intensity=40;
         weightedData=new ArrayList<WeightedLatLng>();
+
+
         mapFragment= (MapFragment)getFragmentManager().findFragmentById(R.id
                 .mapFragment);
         Log.i("TAG", "mapFragment is: " + mapFragment);
@@ -47,7 +48,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(GoogleMap gmap) {
         this.googleMap=mapFragment.getMap();
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(23.60, 90.45), 8));
         googleMap.setMyLocationEnabled(false);
@@ -59,6 +60,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 addHeatMap(latLng);
             }
         });
+        addHeatMap(new LatLng(23.598840, 90.390541938938));
+        addHeatMap(new LatLng(23.598841, 90.3905438778));
+        addHeatMap(new LatLng(23.598842, 90.390541));
+        addHeatMap(new LatLng(23.598843, 90.390541));
+        addHeatMap(new LatLng(23.598844, 90.390540));
+
+        addHeatMap(new LatLng(22.598840, 90.2390541938938));
+        addHeatMap(new LatLng(22.598841, 90.23905438778));
     }
 
     private void addHeatMap(LatLng...locs) {
