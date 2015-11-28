@@ -20,9 +20,9 @@
 				android:icon="@drawable/ic_menu_slideshow"
 				android:title="My Profile"/>
 		<item
-				android:id="@+id/nav_cart"
-				android:icon="@drawable/ic_menu_manage"
-				android:title="Cart"/>
+				android:id="@+id/nav_heatmap"
+				android:icon="@drawable/ic_menu_slideshow"
+				android:title="Heat Map"/>
 		<item
 				android:id="@+id/nav_logout"
 				android:icon="@drawable/ic_menu_manage"

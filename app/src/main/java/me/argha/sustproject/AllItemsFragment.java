@@ -92,7 +92,7 @@ public class AllItemsFragment extends Fragment {
                             item.setRange_max(itemObject.getString("range_max"));
                             item.setRange_min(itemObject.getString("range_min"));
                             item.setExpire_date(itemObject.getString("expire_date"));
-                            item.setRating("5");
+                            item.setRating(itemObject.getString("rating"));
                             item.setPhoto(itemObject.getString("photo"));
                             itemList.add(item);
                         }

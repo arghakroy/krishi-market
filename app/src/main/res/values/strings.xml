@@ -140,6 +140,463 @@
         <item>Litre</item>
     </string-array>
 
+    <string-array name="filter_item">
+        <item>Name</item>
+        <item>Main Category</item>
+        <item>Sub Category</item>
+        <item>Location</item>
+        <item>Publish Date</item>
+        <item>Expire Date</item>
+    </string-array>
+
+	<string name="categories">
+		{
+    \"success\": true,
+    \"data\": [
+		{
+            \"item_id\": \"5\",
+            \"eng_name\": \"Shaak\",
+            \"bn_name\": \"সকল প্রকার\",
+            \"parent_id\": \"0\",
+            \"sub_cat\": [
+                {
+                    \"item_id\": \"41\",
+                    \"eng_name\": \"Lal Shak\",
+                    \"bn_name\": \"সকল প্রকার\",
+                    \"parent_id\": \"5\"
+                }
+            ]
+        },
+        {
+            \"item_id\": \"2\",
+            \"eng_name\": \"Khaddoshosso jatio\",
+            \"bn_name\": \"খাদ্যশস্য জাতীয়\",
+            \"parent_id\": \"0\",
+            \"sub_cat\": [
+                {
+                    \"item_id\": \"15\",
+                    \"eng_name\": \"Dhan\",
+                    \"bn_name\": \"ধান\",
+                    \"parent_id\": \"2\"
+                },
+                {
+                    \"item_id\": \"16\",
+                    \"eng_name\": \"Gom\",
+                    \"bn_name\": \"গম\",
+                    \"parent_id\": \"2\"
+                },
+                {
+                    \"item_id\": \"17\",
+                    \"eng_name\": \"Vutta\",
+                    \"bn_name\": \"ভুট্টা\",
+                    \"parent_id\": \"2\"
+                },
+                {
+                    \"item_id\": \"18\",
+                    \"eng_name\": \"Kalai Dal\",
+                    \"bn_name\": \"কলই ডাল\",
+                    \"parent_id\": \"2\"
+                },
+                {
+                    \"item_id\": \"19\",
+                    \"eng_name\": \"Ata\",
+                    \"bn_name\": \"আটা\",
+                    \"parent_id\": \"2\"
+                },
+                {
+                    \"item_id\": \"20\",
+                    \"eng_name\": \"Gomer Ata\",
+                    \"bn_name\": \"গমের আটা\",
+                    \"parent_id\": \"2\"
+                },
+                {
+                    \"item_id\": \"21\",
+                    \"eng_name\": \"Moyda\",
+                    \"bn_name\": \"ময়দা\",
+                    \"parent_id\": \"2\"
+                },
+                {
+                    \"item_id\": \"22\",
+                    \"eng_name\": \"Shuji\",
+                    \"bn_name\": \"সুজি\",
+                    \"parent_id\": \"2\"
+                },
+                {
+                    \"item_id\": \"23\",
+                    \"eng_name\": \"Mug Dal\",
+                    \"bn_name\": \"মুগ ডাল\",
+                    \"parent_id\": \"2\"
+                },
+                {
+                    \"item_id\": \"24\",
+                    \"eng_name\": \"Moshur Dal\",
+                    \"bn_name\": \"মসূর ডাল\",
+                    \"parent_id\": \"2\"
+                },
+                {
+                    \"item_id\": \"25\",
+                    \"eng_name\": \"Sorisha\",
+                    \"bn_name\": \"সরিষা\",
+                    \"parent_id\": \"2\"
+                }
+            ]
+        },
+        {
+            \"item_id\": \"3\",
+            \"eng_name\": \"Sobji\",
+            \"bn_name\": \"সবজি\",
+            \"parent_id\": \"0\",
+            \"sub_cat\": [
+                {
+                    \"item_id\": \"26\",
+                    \"eng_name\": \"Alu\",
+                    \"bn_name\": \"আলু\",
+                    \"parent_id\": \"3\"
+                },
+                {
+                    \"item_id\": \"27\",
+                    \"eng_name\": \"Peyaaj\",
+                    \"bn_name\": \"পিঁয়াজ\",
+                    \"parent_id\": \"3\"
+                },
+                {
+                    \"item_id\": \"28\",
+                    \"eng_name\": \"Roshun\",
+                    \"bn_name\": \"রসুন\",
+                    \"parent_id\": \"3\"
+                },
+                {
+                    \"item_id\": \"29\",
+                    \"eng_name\": \"Kancha Morich\",
+                    \"bn_name\": \"কাঁচা মরিচ\",
+                    \"parent_id\": \"3\"
+                },
+                {
+                    \"item_id\": \"30\",
+                    \"eng_name\": \"Shalgom\",
+                    \"bn_name\": \"শালগম\",
+                    \"parent_id\": \"3\"
+                },
+                {
+                    \"item_id\": \"31\",
+                    \"eng_name\": \"Lau\",
+                    \"bn_name\": \"লাউ\",
+                    \"parent_id\": \"3\"
+                },
+                {
+                    \"item_id\": \"32\",
+                    \"eng_name\": \"Mishti Kumra\",
+                    \"bn_name\": \"মিষ্টি কুমড়া\",
+                    \"parent_id\": \"3\"
+                },
+                {
+                    \"item_id\": \"33\",
+                    \"eng_name\": \"Mula\",
+                    \"bn_name\": \"মূলা\",
+                    \"parent_id\": \"3\"
+                }
+            ]
+        },
+        {
+            \"item_id\": \"4\",
+            \"eng_name\": \"Masala O Gura\",
+            \"bn_name\": \"মশলা ও গুঁড়া \",
+            \"parent_id\": \"0\",
+            \"sub_cat\": [
+                {
+                    \"item_id\": \"34\",
+                    \"eng_name\": \"Jira\",
+                    \"bn_name\": \"জিরা\",
+                    \"parent_id\": \"4\"
+                },
+                {
+                    \"item_id\": \"35\",
+                    \"eng_name\": \"Dhonia\",
+                    \"bn_name\": \"ধনিয়া\",
+                    \"parent_id\": \"4\"
+                },
+                {
+                    \"item_id\": \"36\",
+                    \"eng_name\": \"Holud\",
+                    \"bn_name\": \"হলুদ\",
+                    \"parent_id\": \"4\"
+                },
+                {
+                    \"item_id\": \"37\",
+                    \"eng_name\": \"Ada\",
+                    \"bn_name\": \"আদা\",
+                    \"parent_id\": \"4\"
+                },
+                {
+                    \"item_id\": \"38\",
+                    \"eng_name\": \"Shukna Morich\",
+                    \"bn_name\": \"শুকনা মরিচ\",
+                    \"parent_id\": \"4\"
+                },
+                {
+                    \"item_id\": \"39\",
+                    \"eng_name\": \"Garam Masala\",
+                    \"bn_name\": \"গরম মশলা\",
+                    \"parent_id\": \"4\"
+                },
+                {
+                    \"item_id\": \"40\",
+                    \"eng_name\": \"Lobon\",
+                    \"bn_name\": \"লবণ\",
+                    \"parent_id\": \"4\"
+                }
+            ]
+        },
+        {
+            \"item_id\": \"5\",
+            \"eng_name\": \"Shaak\",
+            \"bn_name\": \"শাক\",
+            \"parent_id\": \"0\",
+            \"sub_cat\": [
+                {
+                    \"item_id\": \"41\",
+                    \"eng_name\": \"Lal Shak\",
+                    \"bn_name\": \"লাল শাক\",
+                    \"parent_id\": \"5\"
+                },
+                {
+                    \"item_id\": \"42\",
+                    \"eng_name\": \"Sobuj Shak\",
+                    \"bn_name\": \"সবুজ শাক\",
+                    \"parent_id\": \"5\"
+                },
+                {
+                    \"item_id\": \"43\",
+                    \"eng_name\": \"Kalmi Shak\",
+                    \"bn_name\": \"কলমি শাক\",
+                    \"parent_id\": \"5\"
+                },
+                {
+                    \"item_id\": \"44\",
+                    \"eng_name\": \"Pui Shak\",
+                    \"bn_name\": \"পুঁই শাক\",
+                    \"parent_id\": \"5\"
+                }
+            ]
+        },
+        {
+            \"item_id\": \"6\",
+            \"eng_name\": \"Narikel Somporkito\",
+            \"bn_name\": \"নারিকেল সম্পর্কিত \",
+            \"parent_id\": \"0\",
+            \"sub_cat\": [
+                {
+                    \"item_id\": \"45\",
+                    \"eng_name\": \"Daab\",
+                    \"bn_name\": \"ডাব\",
+                    \"parent_id\": \"6\"
+                },
+                {
+                    \"item_id\": \"46\",
+                    \"eng_name\": \"Jhuna Narikel\",
+                    \"bn_name\": \"ঝুনা নারিকেল\",
+                    \"parent_id\": \"6\"
+                },
+                {
+                    \"item_id\": \"47\",
+                    \"eng_name\": \"Narikel Dudh\",
+                    \"bn_name\": \"নারিকেল দুধ\",
+                    \"parent_id\": \"6\"
+                },
+                {
+                    \"item_id\": \"48\",
+                    \"eng_name\": \"Fopra\",
+                    \"bn_name\": \"ফোঁপরা\",
+                    \"parent_id\": \"6\"
+                }
+            ]
+        },
+        {
+            \"item_id\": \"7\",
+            \"eng_name\": \" Follmull\",
+            \"bn_name\": \"ফলমূল\",
+            \"parent_id\": \"0\",
+            \"sub_cat\": [
+                {
+                    \"item_id\": \"49\",
+                    \"eng_name\": \"Kola\",
+                    \"bn_name\": \"কলা\",
+                    \"parent_id\": \"7\"
+                },
+                {
+                    \"item_id\": \"50\",
+                    \"eng_name\": \"Anarosh\",
+                    \"bn_name\": \"আনারশ\",
+                    \"parent_id\": \"7\"
+                },
+                {
+                    \"item_id\": \"51\",
+                    \"eng_name\": \"Lebu\",
+                    \"bn_name\": \"লেবু\",
+                    \"parent_id\": \"7\"
+                },
+                {
+                    \"item_id\": \"52\",
+                    \"eng_name\": \"Komola Lebu\",
+                    \"bn_name\": \"কমলা লেবু\",
+                    \"parent_id\": \"7\"
+                },
+                {
+                    \"item_id\": \"53\",
+                    \"eng_name\": \"Batabi Lebu\",
+                    \"bn_name\": \"বাতাবী লেবু\",
+                    \"parent_id\": \"7\"
+                },
+                {
+                    \"item_id\": \"54\",
+                    \"eng_name\": \"Lichu\",
+                    \"bn_name\": \"লিচু\",
+                    \"parent_id\": \"7\"
+                },
+                {
+                    \"item_id\": \"55\",
+                    \"eng_name\": \"Aamra\",
+                    \"bn_name\": \"আমড়া\",
+                    \"parent_id\": \"7\"
+                },
+                {
+                    \"item_id\": \"56\",
+                    \"eng_name\": \"Kaamranga\",
+                    \"bn_name\": \"কামরাঙ্গা\",
+                    \"parent_id\": \"7\"
+                },
+                {
+                    \"item_id\": \"57\",
+                    \"eng_name\": \"Pepe\",
+                    \"bn_name\": \"পেঁপে\",
+                    \"parent_id\": \"7\"
+                },
+                {
+                    \"item_id\": \"58\",
+                    \"eng_name\": \"Aam\",
+                    \"bn_name\": \"আম\",
+                    \"parent_id\": \"7\"
+                },
+                {
+                    \"item_id\": \"59\",
+                    \"eng_name\": \"Jaam\",
+                    \"bn_name\": \"জাম\",
+                    \"parent_id\": \"7\"
+                }
+            ]
+        },
+        {
+            \"item_id\": \"8\",
+            \"eng_name\": \"Gobadi Khamarjaat\",
+            \"bn_name\": \"গবা্দি খামারজাত \",
+            \"parent_id\": \"0\",
+            \"sub_cat\": [
+                {
+                    \"item_id\": \"60\",
+                    \"eng_name\": \"Deshi Murgir Mangsho\",
+                    \"bn_name\": \"দেশি মুরগির মাংস\",
+                    \"parent_id\": \"8\"
+                },
+                {
+                    \"item_id\": \"61\",
+                    \"eng_name\": \"Poltri Murgir Mangsho\",
+                    \"bn_name\": \"পোলট্রি মুরগির মাংস\",
+                    \"parent_id\": \"8\"
+                },
+                {
+                    \"item_id\": \"62\",
+                    \"eng_name\": \"Gorur Mangsho\",
+                    \"bn_name\": \"গরুর মাংস\",
+                    \"parent_id\": \"8\"
+                },
+                {
+                    \"item_id\": \"63\",
+                    \"eng_name\": \"Khashir Mangsho\",
+                    \"bn_name\": \"খাসির মাংস\",
+                    \"parent_id\": \"8\"
+                }
+            ]
+        },
+        {
+            \"item_id\": \"9\",
+            \"eng_name\": \"Maach\",
+            \"bn_name\": \"মাছ \",
+            \"parent_id\": \"0\",
+            \"sub_cat\": [
+                {
+                    \"item_id\": \"64\",
+                    \"eng_name\": \"Rui\",
+                    \"bn_name\": \"রুই\",
+                    \"parent_id\": \"9\"
+                },
+                {
+                    \"item_id\": \"65\",
+                    \"eng_name\": \"Katla\",
+                    \"bn_name\": \"কাতলা\",
+                    \"parent_id\": \"9\"
+                },
+                {
+                    \"item_id\": \"66\",
+                    \"eng_name\": \"Tilapia\",
+                    \"bn_name\": \"তেলাপিয়া\",
+                    \"parent_id\": \"9\"
+                },
+                {
+                    \"item_id\": \"67\",
+                    \"eng_name\": \"Cingri\",
+                    \"bn_name\": \"চিংড়ী\",
+                    \"parent_id\": \"9\"
+                },
+                {
+                    \"item_id\": \"68\",
+                    \"eng_name\": \"Koi\",
+                    \"bn_name\": \"কৈ\",
+                    \"parent_id\": \"9\"
+                },
+                {
+                    \"item_id\": \"69\",
+                    \"eng_name\": \"Tengra\",
+                    \"bn_name\": \"টেংরা\",
+                    \"parent_id\": \"9\"
+                },
+                {
+                    \"item_id\": \"70\",
+                    \"eng_name\": \"Shutki\",
+                    \"bn_name\": \"শুঁটকি\",
+                    \"parent_id\": \"9\"
+                }
+            ]
+        },
+        {
+            \"item_id\": \"10\",
+            \"eng_name\": \"Onnanno\",
+            \"bn_name\": \"অন্যান্য\",
+            \"parent_id\": \"0\",
+            \"sub_cat\": [
+                {
+                    \"item_id\": \"71\",
+                    \"eng_name\": \"Aachar\",
+                    \"bn_name\": \"আঁচার\",
+                    \"parent_id\": \"10\"
+                },
+                {
+                    \"item_id\": \"72\",
+                    \"eng_name\": \"Modhu\",
+                    \"bn_name\": \"মধু\",
+                    \"parent_id\": \"10\"
+                },
+                {
+                    \"item_id\": \"73\",
+                    \"eng_name\": \"Tetul\",
+                    \"bn_name\": \"তেঁতুল\",
+                    \"parent_id\": \"10\"
+                }
+            ]
+        }
+    ]
+}
+	</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_map">MapActivity</string>

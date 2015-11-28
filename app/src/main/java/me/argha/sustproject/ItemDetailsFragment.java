@@ -40,6 +40,7 @@ public class ItemDetailsFragment extends Fragment {
     @Bind(R.id.itemDetailsDescriptionTv) TextView itemDescTv;
     @Bind(R.id.itemDetailsRatingBar) RatingBar itemRatingBar;
     @Bind(R.id.itemDetailsImageIv)ImageView itemImage;
+    @Bind(R.id.itemDetailsExpireDateTv)TextView expireTv;
 
     public static ItemDetailsFragment newInstance(Item item) {
         Bundle args = new Bundle();
@@ -52,6 +53,7 @@ public class ItemDetailsFragment extends Fragment {
         args.putString("desc",item.getDescription());
         args.putString("rating", item.getRating());
         args.putString("photo", item.getPhoto());
+        args.putString("expire", item.getExpire_date());
 
         ItemDetailsFragment fragment = new ItemDetailsFragment();
         fragment.setArguments(args);
@@ -69,6 +71,9 @@ public class ItemDetailsFragment extends Fragment {
         itemParentCatTv.setText(getArguments().getString("mainCat"));
         itemPriceRangeTv.setText("Price Range: " + getArguments().getString("priceMin") + " - " + getArguments().getString("priceMax"));
         itemDescTv.setText(getArguments().getString("desc"));
+        if(getArguments().getString("expire").length()>3){
+            expireTv.setText("Expire Date: "+getArguments().getString("expire"));
+        }
 
         Picasso.with(getActivity()).load(AppURL.ASSETS+getArguments().getString("photo")).into(itemImage);
 

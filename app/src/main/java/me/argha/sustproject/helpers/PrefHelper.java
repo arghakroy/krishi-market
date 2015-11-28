@@ -39,4 +39,10 @@ public class PrefHelper {
     public String getUserFullName(){
         return preferences.getString("pref_user_full_name",null);
     }
+
+    public void logOut(){
+        saveUserId(null);
+        saveUserName(null);
+        saveUserFullName(null);
+    }
 }

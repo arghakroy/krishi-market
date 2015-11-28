@@ -1,6 +1,8 @@
 package me.argha.sustproject;
 
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
@@ -14,16 +16,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Locale;
 
 import me.argha.sustproject.helpers.PrefHelper;
+import me.argha.sustproject.models.Category;
 import me.argha.sustproject.utils.AppConst;
 import me.argha.sustproject.utils.Util;
 
@@ -47,15 +57,9 @@ public class MainActivity extends AppCompatActivity
         prefHelper=new PrefHelper(this);
 
         fabMenu = (FloatingActionMenu) findViewById(R.id.fabMenu);
+        fabMenu.setVisibility(View.GONE);
         FloatingActionButton searchFabBtn= (FloatingActionButton) fabMenu.findViewById(R.id.searchFabBtn);
         FloatingActionButton voiceBtn= (FloatingActionButton) findViewById(R.id.voiceFabBtn);
-
-        voiceBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                promptSpeechInput();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -80,13 +84,81 @@ public class MainActivity extends AppCompatActivity
         } else {
             navigationView.setCheckedItem(0);
             lastMenuItem=null;
-            fabMenu.showMenu(true);
+            //fabMenu.showMenu(true);
             super.onBackPressed();
         }
     }
 
-    MenuItem lastMenuItem;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_voice:
+                promptSpeechInput();
+                break;
+            case R.id.menu_search:
+                try {
+                    showSearchDialog();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Util.printDebug("Json err",e.getMessage());
+                }
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
+    public void showSearchDialog() throws JSONException {
+        final ArrayList<Category> allCategories=new ArrayList<>();
+        JSONObject object=new JSONObject(getString(R.string.categories));
+        JSONArray categoriesArray=object.getJSONArray("data");
+        for (int i=0;i<categoriesArray.length();i++){
+            JSONObject categoryObject=categoriesArray.getJSONObject(i);
+            Category mainCat=new Category();
+            mainCat.setBnName(categoryObject.getString("bn_name"));
+            mainCat.setEnName(categoryObject.getString("eng_name"));
+            ArrayList<Category> subCatList=new ArrayList<Category>();
+            JSONArray subCatArray=categoryObject.getJSONArray("sub_cat");
+            for (int j=0;j<subCatArray.length();j++){
+                JSONObject subCatObj=subCatArray.getJSONObject(j);
+                Category subCat=new Category();
+                subCat.setBnName(subCatObj.getString("bn_name"));
+                subCat.setEnName(subCatObj.getString("eng_name"));
+                subCatList.add(subCat);
+            }
+            mainCat.setSubCategory(subCatList);
+            allCategories.add(mainCat);
+        }
+
+        View searchLayout=getLayoutInflater().inflate(R.layout.search_dialog_layout,null);
+        Spinner mainCatSpinner= (Spinner) searchLayout.findViewById(R.id.searchMainCatSpinner);
+        final Spinner subCatSpinner= (Spinner) searchLayout.findViewById(R.id.searchSubCatSpinner);
+        mainCatSpinner.setAdapter(new ArrayAdapter<Category>(this,android.R.layout.simple_spinner_item,allCategories));
+        mainCatSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                subCatSpinner.setAdapter(new ArrayAdapter<Category>(MainActivity.this,android.R.layout.simple_spinner_item,allCategories.get(i).getSubCategory()));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        AlertDialog dialog=new AlertDialog.Builder(this)
+            .setPositiveButton("Search", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            })
+            .create();
+
+        dialog.setView(searchLayout);
+        dialog.show();
+
+    }
+
+    MenuItem lastMenuItem;
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         if(item.isChecked())return false;
@@ -107,7 +179,7 @@ public class MainActivity extends AppCompatActivity
                 ft.commit();
                 break;
             case R.id.nav_all_item:
-                fabMenu.showMenu(true);
+                //fabMenu.showMenu(true);
                 break;
             case R.id.nav_profile:
                 fabMenu.hideMenu(true);
@@ -116,6 +188,14 @@ public class MainActivity extends AppCompatActivity
                 ft2.replace(R.id.main_fragment, new MyProfileFragment());
                 ft2.addToBackStack(null);
                 ft2.commit();
+                break;
+            case R.id.nav_logout:
+                prefHelper.logOut();
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
+                break;
+            case R.id.nav_heatmap:
+                startActivity(new Intent(this,MapsActivity.class));
                 break;
         }
 
