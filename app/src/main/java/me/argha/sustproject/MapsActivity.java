@@ -10,6 +10,12 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.TileOverlay;
+import com.google.android.gms.maps.model.TileOverlayOptions;
+import com.google.maps.android.heatmaps.HeatmapTileProvider;
+import com.google.maps.android.heatmaps.WeightedLatLng;
+
+import java.util.ArrayList;
 
 import me.argha.sustproject.utils.Util;
 
@@ -17,6 +23,11 @@ import me.argha.sustproject.utils.Util;
  * Created by ASUS on 11/28/2015.
  */
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback{
+
+    int intensity;
+    ArrayList<WeightedLatLng> weightedData;
+    HeatmapTileProvider heatmapTileProvider;
+    TileOverlay overlay;
 
     MapFragment mapFragment;
     GoogleMap googleMap;
@@ -31,19 +42,44 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Log.i("TAG", "mapFragment is: " + mapFragment);
         mapFragment.getMapAsync(this);
         mapFragment.getMap();
-
+        setData((weightedData=new ArrayList<WeightedLatLng>()));
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         googleMap=mapFragment.getMap();
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(23.60,90.45), 8));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(23.60, 90.45), 8));
         googleMap.setMyLocationEnabled(false);
         Log.i("TAG", "Map is ready");
-        Util.showToast(MapsActivity.this,"Map is ready");
+        Util.showToast(MapsActivity.this, "Map is ready");
+        googleMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLng) {
+                weightedData.add(new WeightedLatLng(latLng,50));
+                setData(weightedData);
+            }
+        });
     }
 
-
+    private void setData(ArrayList<WeightedLatLng> weightedData) {
+        if(heatmapTileProvider==null){
+            if(weightedData.size()==0)
+                return;
+            // Create a heat map tile provider, passing it the latlngs of the police stations.
+            heatmapTileProvider = new HeatmapTileProvider.Builder()
+                    .weightedData(weightedData)
+                    .build();
+            // Add a tile overlay to the map, using the heat map tile provider.
+            overlay = googleMap.addTileOverlay(new TileOverlayOptions().tileProvider
+                    (heatmapTileProvider));
+//            overlay.clearTileCache();
+        }
+        else{
+            heatmapTileProvider.setWeightedData(weightedData);
+            heatmapTileProvider.setRadius(50);
+            overlay.clearTileCache();
+        }
+    }
     @Override
     protected void onResume() {
         // TODO Auto-generated method stub
