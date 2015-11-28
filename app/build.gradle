@@ -39,6 +39,8 @@ dependencies {
     compile 'com.github.clans:fab:1.6.2'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.google.android.gms:play-services-maps:8.3.0'
+    compile 'com.google.android.gms:play-services-location:8.3.0'
+    compile 'com.google.maps.android:android-maps-utils:0.4'
     androidTestCompile 'com.jayway.android.robotium:robotium:5.5.3'
 }
 

@@ -3,6 +3,7 @@ package me.argha.sustproject;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,10 +48,10 @@ import me.argha.sustproject.utils.Util;
  */
 public class MyProfileFragment extends Fragment {
 
-    @Bind(R.id.myProfileNameEt) EditText nameEt;
+    @Bind(R.id.myProfileNameEt) EditText fullNameEt;
     @Bind(R.id.myProfileUserNameEt) EditText userNameEt;
     @Bind(R.id.myProfilePasswordEt) EditText passwordEt;
-    @Bind(R.id.myProfileConfirmPassword) EditText confirmPassEt;
+    @Bind(R.id.myProfileConfirmPassword) EditText passwordConfirmEt;
     @Bind(R.id.myProfilePhoneEt) EditText phoneEt;
     @Bind(R.id.myProfileAddressEt) EditText addressEt;
     @Bind(R.id.myProfileDistrictSpinner)Spinner districtSpinner;
@@ -57,6 +59,7 @@ public class MyProfileFragment extends Fragment {
     @Bind(R.id.changePictureImgBtn) ImageButton profilePicBtn;
 
     PrefHelper prefHelper;
+    Context context;
 
 
     Uri fileUri;
@@ -71,7 +74,7 @@ public class MyProfileFragment extends Fragment {
         ButterKnife.bind(this, root);
         prefHelper=new PrefHelper(getActivity());
         httpClient= HTTPHelper.getHTTPClient();
-
+        context=getActivity();
         profilePicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,52 +96,78 @@ public class MyProfileFragment extends Fragment {
     }
 
     private void updateUserProfile() throws FileNotFoundException {
-        RequestParams params=new RequestParams();
-        params.add("user_id",prefHelper.getUserId());
-        params.add("name",nameEt.getText().toString());
-        params.add("username",userNameEt.getText().toString());
-        params.add("password",passwordEt.getText().toString());
-        params.add("phone",phoneEt.getText().toString());
-        params.add("address",phoneEt.getText().toString());
-        params.add("district",getResources().getStringArray(R.array.districtsEnglish)[districtSpinner.getSelectedItemPosition()]);
-        if(filePath!=null && filePath.length()>2){
-            params.put("photo",new File(filePath));
-        }
+        if (TextUtils.isEmpty(userNameEt.getText().toString())) {
+            Util.showToast(context, "Please enter a username");
+        } else if (TextUtils.isEmpty(fullNameEt.getText().toString())) {
+            Util.showToast(context, "Please enter your fullname");
+        } else if (TextUtils.isEmpty(phoneEt.getText().toString())) {
+            Util.showToast(context, "Please enter your phone");
+        } else if (TextUtils.isEmpty(addressEt.getText().toString())) {
+            Util.showToast(context, "Please enter an address");
+        } else if (TextUtils.isEmpty(passwordEt.getText().toString())) {
+            Util.showToast(context, "Password cannot be vacant");
+        } else if (TextUtils.isEmpty(passwordConfirmEt.getText().toString())) {
+            Util.showToast(context, "Please confirm your password");
+        } else if (passwordEt.length() < 6) {
+            Util.showToast(context, "Passwords must be of at least 6 characters");
+        } else if (!passwordEt.getText().toString().equals(passwordConfirmEt
+                .getText()
+                .toString())) {
+            Util.showToast(context, "Passwords don't match");
+        } else if (districtSpinner.getSelectedItemPosition() == 0) {
+            Util.showToast(context, "Please Choose a district");
+        } else {
 
-        final ProgressDialog dialog=Util.getProgressDialog(getActivity(),"Updating. Please wait...");
 
-        httpClient.post(AppURL.UPDATE_PROFILE,params,new JsonHttpResponseHandler(){
-            @Override
-            public void onStart() {
-                super.onStart();
-                dialog.show();
+            RequestParams params = new RequestParams();
+            params.add("user_id", prefHelper.getUserId());
+            params.add("name", fullNameEt.getText().toString());
+            params.add("username", userNameEt.getText().toString());
+            params.add("password", passwordEt.getText().toString());
+            params.add("phone", phoneEt.getText().toString());
+            params.add("address", phoneEt.getText().toString());
+            params.add("district", getResources().getStringArray(R.array.districtsEnglish)[districtSpinner.getSelectedItemPosition()]);
+            if (filePath != null && filePath.length() > 2) {
+                params.put("photo", new File(filePath));
             }
 
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                super.onSuccess(statusCode, headers, response);
-                Util.printDebug("Update response",response.toString());
-                try {
-                    if(response.getBoolean("success")){
-                        Util.showToast(getActivity(),"Profile Update Successful");
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+
+            final ProgressDialog dialog = Util.getProgressDialog(getActivity(), "Updating. Please wait...");
+
+            httpClient.post(AppURL.UPDATE_PROFILE, params, new JsonHttpResponseHandler() {
+                @Override
+                public void onStart() {
+                    super.onStart();
+                    dialog.show();
                 }
-            }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
-                Util.printDebug("Response error",responseString);
-            }
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    super.onSuccess(statusCode, headers, response);
+                    Util.printDebug("Update response", response.toString());
+                    try {
+                        if (response.getBoolean("success")) {
+                            Util.showToast(getActivity(), "Profile Update Successful");
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
 
-            @Override
-            public void onFinish() {
-                super.onFinish();
-                dialog.dismiss();
-            }
-        });
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    super.onFailure(statusCode, headers, responseString, throwable);
+                    Util.printDebug("Response error", responseString);
+                }
+
+                @Override
+                public void onFinish() {
+                    super.onFinish();
+                    dialog.dismiss();
+                }
+
+            });
+        }
     }
 
     private void getUserDetailsData() {
@@ -159,7 +188,7 @@ public class MyProfileFragment extends Fragment {
                 try {
                     if(response.getBoolean("success")){
                         JSONObject data=response.getJSONObject("data");
-                        nameEt.setText(data.getString("name"));
+                        fullNameEt.setText(data.getString("name"));
                         userNameEt.setText(data.getString("username"));
                         phoneEt.setText(data.getString("phone"));
                         addressEt.setText(data.getString("address"));
