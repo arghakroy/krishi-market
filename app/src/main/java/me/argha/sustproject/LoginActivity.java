@@ -61,7 +61,9 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loginUser(mEmailEt.getText().toString(), mPasswordEt.getText().toString());
+                if(Util.isConnectedToInternet(getApplicationContext()))
+                    loginUser(mEmailEt.getText().toString(), mPasswordEt.getText().toString());
+                else Util.showNoInternetDialog(getApplicationContext());
             }
         });
         PrefHelper prefHelper=new PrefHelper(this);

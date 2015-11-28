@@ -89,75 +89,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.menu_voice:
-                promptSpeechInput();
-                break;
-            case R.id.menu_search:
-                try {
-                    showSearchDialog();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Util.printDebug("Json err",e.getMessage());
-                }
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void showSearchDialog() throws JSONException {
-        final ArrayList<Category> allCategories=new ArrayList<>();
-        JSONObject object=new JSONObject(getString(R.string.categories));
-        JSONArray categoriesArray=object.getJSONArray("data");
-        for (int i=0;i<categoriesArray.length();i++){
-            JSONObject categoryObject=categoriesArray.getJSONObject(i);
-            Category mainCat=new Category();
-            mainCat.setBnName(categoryObject.getString("bn_name"));
-            mainCat.setEnName(categoryObject.getString("eng_name"));
-            ArrayList<Category> subCatList=new ArrayList<Category>();
-            JSONArray subCatArray=categoryObject.getJSONArray("sub_cat");
-            for (int j=0;j<subCatArray.length();j++){
-                JSONObject subCatObj=subCatArray.getJSONObject(j);
-                Category subCat=new Category();
-                subCat.setBnName(subCatObj.getString("bn_name"));
-                subCat.setEnName(subCatObj.getString("eng_name"));
-                subCatList.add(subCat);
-            }
-            mainCat.setSubCategory(subCatList);
-            allCategories.add(mainCat);
-        }
-
-        View searchLayout=getLayoutInflater().inflate(R.layout.search_dialog_layout,null);
-        Spinner mainCatSpinner= (Spinner) searchLayout.findViewById(R.id.searchMainCatSpinner);
-        final Spinner subCatSpinner= (Spinner) searchLayout.findViewById(R.id.searchSubCatSpinner);
-        mainCatSpinner.setAdapter(new ArrayAdapter<Category>(this,android.R.layout.simple_spinner_item,allCategories));
-        mainCatSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                subCatSpinner.setAdapter(new ArrayAdapter<Category>(MainActivity.this,android.R.layout.simple_spinner_item,allCategories.get(i).getSubCategory()));
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        AlertDialog dialog=new AlertDialog.Builder(this)
-            .setPositiveButton("Search", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-
-                }
-            })
-            .create();
-
-        dialog.setView(searchLayout);
-        dialog.show();
-
-    }
-
     MenuItem lastMenuItem;
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -202,36 +133,5 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    private void promptSpeechInput() {
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Search Items");
-        try {
-            startActivityForResult(intent, AppConst.REQ_CODE_SPEECH_INPUT);
-        } catch (ActivityNotFoundException a) {
-            Toast.makeText(getApplicationContext(),
-                "Speech is not supported",
-                Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case AppConst.REQ_CODE_SPEECH_INPUT: {
-                if (resultCode == RESULT_OK && null != data) {
-                    ArrayList<String> result = data
-                        .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    Util.showToast(MainActivity.this,result.get(0));
-                }
-                break;
-            }
-
-        }
     }
 }
