@@ -92,6 +92,8 @@ public class LoginActivity extends AppCompatActivity {
                         prefHelper.saveUserName(resObject.getString("username"));
                         startActivity(new Intent(context, MainActivity.class));
                         finish();
+                    }else {
+                        Util.showToast(context,"Username and Password Doesn't match");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

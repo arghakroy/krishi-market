@@ -135,7 +135,7 @@ public class AllItemsFragment extends Fragment {
             holder.itemCategory.setText(itemList.get(position).getSub_category());
             holder.itemRating.setText("Rating: "+itemList.get(position).getRating());
             holder.itemPriceRange.setText("Price Range: " + itemList.get(position).getRange_min() + " - " + itemList.get(position).getRange_max());
-            Picasso.with(getActivity()).load(itemList.get(position).getPhoto()).into(holder.itemImage);
+            Picasso.with(getActivity()).load(AppURL.ASSET+itemList.get(position).getPhoto()).into(holder.itemImage);
         }
 
         @Override

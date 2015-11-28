@@ -19,17 +19,17 @@
 			android:src="@android:drawable/sym_def_app_icon"/>
 
 	<TextView
+			android:id="@+id/navUserFullNameTv"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:paddingTop="@dimen/nav_header_vertical_spacing"
 			android:gravity="center"
-			android:text="Android Studio"
+			android:text="Krishi Bazaar"
 			android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
 	<TextView
-			android:id="@+id/textView"
+			android:id="@+id/navUserNameTv"
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="android.studio@android.com"/>
+			android:layout_height="wrap_content"/>
 
 </LinearLayout>

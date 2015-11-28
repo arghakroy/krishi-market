@@ -8,6 +8,7 @@ public interface AppURL {
 
     //String DOMAIN="http://10.0.3.2:81/efarmer/api/";
     String DOMAIN="http://argha.xyz/_efarmer/api/";
+    String ASSET="http://argha.xyz/_efarmer/assets/uploads";
     String LOGIN=DOMAIN+"login";
     String REGISTER=DOMAIN+"register";
     String CATEGORIES=DOMAIN+"categories";
