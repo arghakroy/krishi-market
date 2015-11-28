@@ -37,17 +37,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_maps);
         Toast.makeText(MapsActivity.this,"BLABLA",Toast.LENGTH_SHORT).show();
         Log.i("TAG", "On create");
+        intensity=40;
+        weightedData=new ArrayList<WeightedLatLng>();
         mapFragment= (MapFragment)getFragmentManager().findFragmentById(R.id
                 .mapFragment);
         Log.i("TAG", "mapFragment is: " + mapFragment);
         mapFragment.getMapAsync(this);
-        mapFragment.getMap();
-        setData((weightedData=new ArrayList<WeightedLatLng>()));
+        setData();
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        googleMap=mapFragment.getMap();
+        this.googleMap=mapFragment.getMap();
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(23.60, 90.45), 8));
         googleMap.setMyLocationEnabled(false);
         Log.i("TAG", "Map is ready");
@@ -55,16 +56,28 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         googleMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
             public void onMapLongClick(LatLng latLng) {
-                weightedData.add(new WeightedLatLng(latLng,50));
-                setData(weightedData);
+                addHeatMap(latLng);
             }
         });
     }
 
-    private void setData(ArrayList<WeightedLatLng> weightedData) {
+    private void addHeatMap(LatLng...locs) {
+//        int intensity=10;
+
+        for(LatLng i:locs){
+            weightedData.add(new WeightedLatLng(i, intensity));
+//            intensity--;
+        }
+        // Get the data: latitude/longitude positions of police stations.
+
+        setData();
+    }
+
+    private void setData() {
+        if(weightedData.size()<=0)
+            return;
         if(heatmapTileProvider==null){
-            if(weightedData.size()==0)
-                return;
+
             // Create a heat map tile provider, passing it the latlngs of the police stations.
             heatmapTileProvider = new HeatmapTileProvider.Builder()
                     .weightedData(weightedData)
@@ -76,7 +89,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         else{
             heatmapTileProvider.setWeightedData(weightedData);
-            heatmapTileProvider.setRadius(50);
+            heatmapTileProvider.setRadius(40);
             overlay.clearTileCache();
         }
     }
