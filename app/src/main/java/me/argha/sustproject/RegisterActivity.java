@@ -120,6 +120,8 @@ public class RegisterActivity extends AppCompatActivity {
                         prefHelper.saveUserName(resObject.getString("username"));
                         setResult(RESULT_OK);
                         finish();
+                    }else {
+                        Util.showToast(RegisterActivity.this,"username is already used");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -129,7 +131,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
-                Util.printDebug("Register fail",responseString);
+                Util.printDebug("Register fail", responseString);
             }
 
             @Override

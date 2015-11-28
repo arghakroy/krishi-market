@@ -25,6 +25,7 @@ import android.widget.Spinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -192,6 +193,9 @@ public class MyProfileFragment extends Fragment {
                         userNameEt.setText(data.getString("username"));
                         phoneEt.setText(data.getString("phone"));
                         addressEt.setText(data.getString("address"));
+                        if(data.getString("photo").length()>5){
+                            Picasso.with(getActivity()).load(AppURL.ASSETS+data.getString("photo")).into(profilePicBtn);
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
