@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,6 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -105,57 +105,76 @@ public class AddNewItemFragment extends Fragment implements View.OnClickListener
     }
 
     private void saveNewItem() throws FileNotFoundException {
-        RequestParams params=new RequestParams();
-        params.add("user_id",prefHelper.getUserId());
-        params.add("name",itemNameEt.getText().toString());
-        params.add("description",itemDescEt.getText().toString());
-        params.add("main_category",((Category)mainCatSpinner.getSelectedItem()).getEnName());
-        params.add("sub_category", ((Category) subCatSpinner.getSelectedItem()).getEnName());
-        params.add("quantity", itemQuantityEt.getText().toString());
-        params.add("unit", unitSpinner.getSelectedItem().toString());
-        params.add("range_min",itemRangeMinEt.getText().toString());
-        params.add("range_max", itemRangeMaxEt.getText().toString());
-        if(hasExpire.isChecked() && expireDate!=null)
-            params.add("expire_date",expireDate);
-        else params.add("expire_date","");
-        params.put("photo", new File(filePath));
+        if((TextUtils.isEmpty(itemNameEt.getText().toString() )||
+                (TextUtils.isEmpty(itemNameEt.getText().toString())) ||
+                (TextUtils.isEmpty(itemDescEt.getText().toString())) ||
+                (TextUtils.isEmpty(itemQuantityEt.getText().toString())) ||
+                (TextUtils.isEmpty(itemRangeMaxEt.getText().toString())) ||
+                (TextUtils.isEmpty(itemRangeMinEt.getText().toString())))) {
 
-        final ProgressDialog dialog=Util.getProgressDialog(getActivity(),"Submitting. Please wait...");
-        httpClient.post(AppURL.ADD_ITEM,params,new JsonHttpResponseHandler(){
-            @Override
-            public void onStart() {
-                super.onStart();
-                dialog.show();
-            }
+            Util.showToast(getContext(),"None of the fields can be blank");
 
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                super.onSuccess(statusCode, headers, response);
-                Util.printDebug("Add item response",response.toString());
-                try {
-                    if(response.getBoolean("success")) {
-                        Util.showToast(getActivity(),"Item is successfully published");
-                        getActivity().onBackPressed();
-                    }
-                    else Util.showToast(getActivity(),"Something is wrong");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Util.printDebug("json excep",e.getMessage());
+        }else if(Double.valueOf(itemQuantityEt.getText().toString())<0 ||
+                Double.valueOf(itemRangeMinEt.getText().toString())<0 ||
+                Double.valueOf(itemRangeMaxEt.getText().toString())<Double.valueOf(itemRangeMinEt
+                        .getText().toString())){
+                Util.showToast(getContext(),"None of the values can be zero or less and Max price" +
+                        " must be greater than Min price");
+        }else if(filePath==(null)) {
+            showImageChooseDialog();
+        }else{
+            RequestParams params=new RequestParams();
+            params.add("user_id",prefHelper.getUserId());
+            params.add("name",itemNameEt.getText().toString());
+            params.add("description",itemDescEt.getText().toString());
+            params.add("main_category",((Category)mainCatSpinner.getSelectedItem()).getEnName());
+            params.add("sub_category", ((Category) subCatSpinner.getSelectedItem()).getEnName());
+            params.add("quantity", itemQuantityEt.getText().toString());
+            params.add("unit", unitSpinner.getSelectedItem().toString());
+            params.add("range_min",itemRangeMinEt.getText().toString());
+            params.add("range_max", itemRangeMaxEt.getText().toString());
+            if(hasExpire.isChecked() && expireDate!=null)
+                params.add("expire_date",expireDate);
+            else params.add("expire_date","");
+            params.put("photo", new File(filePath));
+
+            final ProgressDialog dialog=Util.getProgressDialog(getActivity(),"Submitting. Please wait...");
+            httpClient.post(AppURL.ADD_ITEM,params,new JsonHttpResponseHandler(){
+                @Override
+                public void onStart() {
+                    super.onStart();
+                    dialog.show();
                 }
-            }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
-                Util.printDebug("Add item error", responseString);
-            }
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    super.onSuccess(statusCode, headers, response);
+                    Util.printDebug("Add item response",response.toString());
+                    try {
+                        if(response.getBoolean("success")) {
+                            Util.showToast(getActivity(),"Item is successfully published");
+                            getActivity().onBackPressed();
+                        }
+                        else Util.showToast(getActivity(),"Something is wrong");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Util.printDebug("json excep",e.getMessage());
+                    }
+                }
 
-            @Override
-            public void onFinish() {
-                super.onFinish();
-                dialog.dismiss();
-            }
-        });
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    super.onFailure(statusCode, headers, responseString, throwable);
+                    Util.printDebug("Add item error", responseString);
+                }
+
+                @Override
+                public void onFinish() {
+                    super.onFinish();
+                    dialog.dismiss();
+                }
+            });
+        }
     }
 
     private void getAllCategories() {
@@ -230,14 +249,14 @@ public class AddNewItemFragment extends Fragment implements View.OnClickListener
         final View dialogView = getActivity().getLayoutInflater().inflate(R.layout.form_date_time_picker_layout, null);
         final DatePicker datePicker = (DatePicker) dialogView.findViewById(R.id.date_picker);
         final AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-            .setPositiveButton("Save", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    expireDate=Util.parseDateTime(datePicker.getDayOfMonth(),datePicker.getMonth(),datePicker.getYear(),0,0);
-                    hasExpire.setText("Expire: "+expireDate);
-                }
-            })
-            .create();
+                .setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        expireDate=Util.parseDateTime(datePicker.getDayOfMonth(),datePicker.getMonth(),datePicker.getYear(),0,0);
+                        hasExpire.setText("Expire: "+expireDate);
+                    }
+                })
+                .create();
         alertDialog.setView(dialogView);
         alertDialog.show();
     }
