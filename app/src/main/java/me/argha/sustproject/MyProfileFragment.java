@@ -125,7 +125,7 @@ public class MyProfileFragment extends Fragment {
             params.add("username", userNameEt.getText().toString());
             params.add("password", passwordEt.getText().toString());
             params.add("phone", phoneEt.getText().toString());
-            params.add("address", phoneEt.getText().toString());
+            params.add("address", addressEt.getText().toString());
             params.add("district", getResources().getStringArray(R.array.districtsEnglish)[districtSpinner.getSelectedItemPosition()]);
             if (filePath != null && filePath.length() > 2) {
                 params.put("photo", new File(filePath));
