@@ -7,12 +7,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,6 +39,7 @@ public class ItemDetailsFragment extends Fragment {
     @Bind(R.id.itemDetailsPriceRange) TextView itemPriceRangeTv;
     @Bind(R.id.itemDetailsDescriptionTv) TextView itemDescTv;
     @Bind(R.id.itemDetailsRatingBar) RatingBar itemRatingBar;
+    @Bind(R.id.itemDetailsImageIv)ImageView itemImage;
 
     public static ItemDetailsFragment newInstance(Item item) {
         Bundle args = new Bundle();
@@ -48,6 +51,7 @@ public class ItemDetailsFragment extends Fragment {
         args.putString("priceMax",item.getRange_max());
         args.putString("desc",item.getDescription());
         args.putString("rating", item.getRating());
+        args.putString("photo", item.getPhoto());
 
         ItemDetailsFragment fragment = new ItemDetailsFragment();
         fragment.setArguments(args);
@@ -65,6 +69,8 @@ public class ItemDetailsFragment extends Fragment {
         itemParentCatTv.setText(getArguments().getString("mainCat"));
         itemPriceRangeTv.setText("Price Range: " + getArguments().getString("priceMin") + " - " + getArguments().getString("priceMax"));
         itemDescTv.setText(getArguments().getString("desc"));
+
+        Picasso.with(getActivity()).load(AppURL.ASSETS+getArguments().getString("photo")).into(itemImage);
 
         itemRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override

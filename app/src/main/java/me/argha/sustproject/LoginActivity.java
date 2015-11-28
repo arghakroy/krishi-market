@@ -61,9 +61,14 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loginUser(mEmailEt.getText().toString(),mPasswordEt.getText().toString());
+                loginUser(mEmailEt.getText().toString(), mPasswordEt.getText().toString());
             }
         });
+        PrefHelper prefHelper=new PrefHelper(this);
+        if(prefHelper.getUserId()!=null){
+            startActivity(new Intent(this,MainActivity.class));
+            finish();
+        }
     }
 
     private void loginUser(String username, String password) {
