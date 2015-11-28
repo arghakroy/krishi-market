@@ -5,9 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
 
 import me.argha.sustproject.utils.Util;
 
@@ -26,7 +28,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Log.i("TAG", "On create");
         mapFragment= (MapFragment)getFragmentManager().findFragmentById(R.id
                 .mapFragment);
-        Log.i("TAG","mapFragment is: "+mapFragment);
+        Log.i("TAG", "mapFragment is: " + mapFragment);
         mapFragment.getMapAsync(this);
         mapFragment.getMap();
 
@@ -35,10 +37,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         googleMap=mapFragment.getMap();
-        googleMap.setMyLocationEnabled(true);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(23.60,90.45), 8));
+        googleMap.setMyLocationEnabled(false);
         Log.i("TAG", "Map is ready");
         Util.showToast(MapsActivity.this,"Map is ready");
     }
+
 
     @Override
     protected void onResume() {
