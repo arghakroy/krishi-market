@@ -42,7 +42,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Log.i("TAG", "mapFragment is: " + mapFragment);
         mapFragment.getMapAsync(this);
         mapFragment.getMap();
-
+        setData(new ArrayList<WeightedLatLng>());
     }
 
     @Override
@@ -68,7 +68,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         else{
             heatmapTileProvider.setWeightedData(weightedData);
-            heatmapTileProvider.setRadius(40);
+            heatmapTileProvider.setRadius(50);
             overlay.clearTileCache();
         }
     }
